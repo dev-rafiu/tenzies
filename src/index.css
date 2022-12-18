@@ -60,6 +60,10 @@ main {
   padding: 0.5rem;
 }
 
+.rolls {
+  margin-bottom: 1rem;
+}
+
 .roll-btn {
   background-color: #5035ff;
   color: #fff;

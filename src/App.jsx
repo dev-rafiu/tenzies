@@ -6,6 +6,7 @@ import Confetti from "react-confetti";
 function App() {
   const [dice, setDice] = useState(allNewDice);
   const [tenzies, setTenzies] = useState(false);
+  const [rolls, setRolls] = useState(0);
 
   function createNewDie() {
     return {
@@ -32,9 +33,14 @@ function App() {
   }
 
   function rollDice() {
+    setRolls((prevRolls) => {
+      return rolls + 1;
+    });
+
     if (tenzies) {
       setDice(allNewDice);
       setTenzies(false);
+      setRolls(0);
     }
 
     setDice((oldDice) => {
@@ -54,6 +60,8 @@ function App() {
     }
   }, [dice]);
 
+  // const { width, height } = useWindowSize();
+
   return (
     <main>
       <h2 className="title">Tenzies</h2>
@@ -67,6 +75,15 @@ function App() {
           <Die key={die.id} die={die} holdDie={holdDie} />
         ))}
       </div>
+
+      {tenzies ? (
+        <p className="rolls">Total Clicks: {rolls}</p>
+      ) : (
+        <p className="rolls">
+          {`You clicked ${rolls} ${rolls === 1 ? "time" : "times"}`}
+        </p>
+      )}
+
       <button className="roll-btn" onClick={rollDice}>
         {tenzies ? "Restart" : "Roll"}
       </button>
